@@ -1,9 +1,9 @@
-import Prompt from '@/app/components/Prompt'
+import Chat from '@/app/components/Chat'
 
 export default function Page() {
   return (
     <div>
-      <Prompt />
+      <Chat />
     </div>
   )
 }
