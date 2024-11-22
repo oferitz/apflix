@@ -1,12 +1,17 @@
 import { type Message, StreamData, convertToCoreMessages, streamText } from 'ai'
 
-import { systemPrompt } from '@/app/lib/prompts'
+import { getPrompt } from '@/app/lib/prompts'
 import { openai } from '@ai-sdk/openai'
 
 export const maxDuration = 60
 
+type RequestBody = {
+  messages: Array<Message>
+  userUrls: string[]
+}
+
 export async function POST(request: Request) {
-  const { messages }: { messages: Array<Message> } = await request.json()
+  const { messages, userUrls = [] }: RequestBody = await request.json()
 
   const coreMessages = convertToCoreMessages(messages)
 
@@ -14,7 +19,7 @@ export async function POST(request: Request) {
 
   const result = streamText({
     model: openai('gpt-4o-mini'),
-    system: systemPrompt,
+    system: getPrompt(userUrls.join(' ')),
     messages: coreMessages,
     maxSteps: 5,
     onFinish: async () => streamingData.close()

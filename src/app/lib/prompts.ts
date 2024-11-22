@@ -1,4 +1,4 @@
-export const mainPrompt = `
+const mainPrompt = `
   return the best movie recommendation out of the movies list based on the user Description.
 
   **movies List:**
@@ -14,7 +14,11 @@ export const mainPrompt = `
     10. Forrest Gump
   `
 
-export const defaultPrompt =
+const defaultPrompt =
   'You are a friendly assistant! Keep your responses informative and helpful.'
 
-export const systemPrompt = `${defaultPrompt}\n\n${mainPrompt}`
+const userUrlsPrompt =
+  'In addition to the movies list, you can also provide recommendations based on the following user IMDb URLs:'
+
+export const getPrompt = (userUrls: string) =>
+  `${defaultPrompt}\n\n${mainPrompt}.${userUrls ? `\n\n${userUrlsPrompt}\n${userUrls}` : ''}`
