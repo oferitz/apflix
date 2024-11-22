@@ -1,13 +1,13 @@
-
 'use client'
 
-import {NextUIProvider} from '@nextui-org/react'
-import React from "react";
+import AppLayout from '@/app/components/AppLayout'
+import { NextUIProvider } from '@nextui-org/react'
+import type React from 'react'
 
-export function Providers({children}: { children: React.ReactNode }) {
-    return (
-        <NextUIProvider>
-            {children}
-        </NextUIProvider>
-    )
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <NextUIProvider>
+      <AppLayout>{children}</AppLayout>
+    </NextUIProvider>
+  )
 }

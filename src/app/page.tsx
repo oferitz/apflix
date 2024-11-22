@@ -1,9 +1,9 @@
-import { Button } from '@nextui-org/button'
+import Prompt from '@/app/components/Prompt'
 
 export default function Page() {
   return (
     <div>
-      <Button>Click me</Button>
+      <Prompt />
     </div>
   )
 }
