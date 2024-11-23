@@ -17,8 +17,8 @@ const mainPrompt = `
 const defaultPrompt =
   'You are a friendly assistant! Keep your responses informative and helpful.'
 
-const userUrlsPrompt =
-  'In addition to the movies list, you can also provide recommendations based on the following user IMDb URLs:'
+export const userMoviesPrompt = (moviesData: string) =>
+  `In addition to the movies list, you can also provide recommendations based on the following movies data:\n\n${moviesData}`
 
-export const getPrompt = (userUrls: string) =>
-  `${defaultPrompt}\n\n${mainPrompt}.${userUrls ? `\n\n${userUrlsPrompt}\n${userUrls}` : ''}`
+export const getPrompt = (userMoviesPrompt: string) =>
+  `${defaultPrompt}\n\n${mainPrompt}.\n\n${userMoviesPrompt}`

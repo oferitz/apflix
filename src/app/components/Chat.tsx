@@ -4,7 +4,7 @@ import ChatActions from '@/app/components/ChatActions'
 import ChatMessage from '@/app/components/ChatMessage'
 import NoMessage from '@/app/components/NoMessage'
 import UserUrls from '@/app/components/UserUrls'
-import { getValidUrls } from '@/app/lib/helpers'
+import { getValidImdbIds } from '@/app/lib/helpers'
 import { useScrollToBottom } from '@/app/lib/hooks/useScrollToBottom'
 import { Textarea } from '@nextui-org/input'
 import { useChat } from 'ai/react'
@@ -16,7 +16,7 @@ export default function Chat() {
   const { messages, handleInputChange, handleSubmit, input, isLoading } =
     useChat({
       body: {
-        userUrls: getValidUrls(urls)
+        userMovieIds: getValidImdbIds(urls)
       }
     })
 
@@ -28,8 +28,8 @@ export default function Chat() {
     setUrls(Array.from(new Set(newUrls)))
   }
 
-  const handleRemove = (url: string) => {
-    setUrls(urls.filter((u) => u !== url))
+  const handleRemove = (id: string) => {
+    setUrls(urls.filter((u) => !u.includes(id)))
   }
 
   return (
