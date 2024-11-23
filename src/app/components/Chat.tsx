@@ -64,6 +64,7 @@ export default function Chat() {
           value={input}
           onChange={handleInputChange}
           disabled={isLoading}
+          variant="bordered"
           labelPlacement="outside"
           placeholder="Tell me about the type of movie you feel like watching today!"
           className="col-span-12 md:col-span-6 mb-6 md:mb-0"
