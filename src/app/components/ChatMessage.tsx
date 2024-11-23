@@ -9,7 +9,7 @@ interface MessageProps {
 export default function ChatMessage({ message }: MessageProps) {
   return (
     <motion.div
-      className="w-full mx-auto max-w-3xl px-4 group/message"
+      className="w-full mx-auto max-w-3xl"
       initial={{ y: 5, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       data-role={message.role}

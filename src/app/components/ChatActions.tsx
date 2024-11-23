@@ -21,20 +21,6 @@ export default function ChatActions({
 }: ChatActions) {
   return (
     <div className="flex gap-2 self-end">
-      <Button
-        size="sm"
-        isIconOnly
-        radius="full"
-        className="bg-gradient-to-tr from-green-500 to-emerald-500"
-        isDisabled={isLoading}
-        type="submit"
-      >
-        {isLoading ? (
-          <Square size={12} stroke="black" fill="black" />
-        ) : (
-          <ArrowUp size={20} stroke="black" />
-        )}
-      </Button>
       <Popover placement="bottom" showArrow offset={10}>
         <PopoverTrigger>
           <Button size="sm" isIconOnly radius="full" isDisabled={isLoading}>
@@ -74,6 +60,20 @@ export default function ChatActions({
           )}
         </PopoverContent>
       </Popover>
+      <Button
+        size="sm"
+        isIconOnly
+        radius="full"
+        className="bg-gradient-to-tr from-green-500 to-emerald-500"
+        isDisabled={isLoading}
+        type="submit"
+      >
+        {isLoading ? (
+          <Square size={12} stroke="black" fill="black" />
+        ) : (
+          <ArrowUp size={20} stroke="black" />
+        )}
+      </Button>
     </div>
   )
 }

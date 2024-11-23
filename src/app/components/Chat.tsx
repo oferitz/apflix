@@ -3,6 +3,7 @@
 import ChatActions from '@/app/components/ChatActions'
 import ChatMessage from '@/app/components/ChatMessage'
 import NoMessage from '@/app/components/NoMessage'
+import ThinkingBot from '@/app/components/ThinkingBot'
 import UserUrls from '@/app/components/UserUrls'
 import { getValidImdbIds } from '@/app/lib/helpers'
 import { useScrollToBottom } from '@/app/lib/hooks/useScrollToBottom'
@@ -33,29 +34,32 @@ export default function Chat() {
   }
 
   return (
-    <div className="w-full mx-auto max-w-3xl px-4">
-      <AnimatePresence>
+    <>
+      <div
+        ref={messagesContainerRef}
+        className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll pt-4"
+      >
+        {messages.length === 0 && <NoMessage />}
+
+        {messages.map((message) => (
+          <AnimatePresence key={message.id}>
+            <ChatMessage message={message} />
+          </AnimatePresence>
+        ))}
+
+        {isLoading &&
+          messages.length > 0 &&
+          messages[messages.length - 1].role === 'user' && <ThinkingBot />}
+
         <div
-          ref={messagesContainerRef}
-          className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll pt-4"
-        >
-          {messages.length === 0 && <NoMessage />}
-
-          {messages.map((message) => (
-            <ChatMessage key={message.id} message={message} />
-          ))}
-
-          {isLoading &&
-            messages.length > 0 &&
-            messages[messages.length - 1].role === 'user' && <div>...</div>}
-
-          <div
-            ref={messagesEndRef}
-            className="shrink-0 min-w-[24px] min-h-[24px]"
-          />
-        </div>
-      </AnimatePresence>
-      <form onSubmit={handleSubmit}>
+          ref={messagesEndRef}
+          className="shrink-0 min-w-[24px] min-h-[24px]"
+        />
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl"
+      >
         <Textarea
           value={input}
           onChange={handleInputChange}
@@ -64,7 +68,7 @@ export default function Chat() {
           placeholder="Tell me about the type of movie you feel like watching today!"
           className="col-span-12 md:col-span-6 mb-6 md:mb-0"
           classNames={{
-            input: 'text-xl'
+            input: 'text-lg'
           }}
           endContent={
             <ChatActions
@@ -76,6 +80,6 @@ export default function Chat() {
         />
       </form>
       <UserUrls urls={urls} onRemove={handleRemove} />
-    </div>
+    </>
   )
 }
