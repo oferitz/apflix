@@ -4,7 +4,7 @@ import type React from 'react'
 export default function AppLayout({ children }: React.PropsWithChildren) {
   return (
     <div>
-      <header className="p-4">
+      <header className="p-4 sticky top-0">
         <h1
           className={cn(
             'text-4xl font-bold',
