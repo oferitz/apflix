@@ -1,5 +1,5 @@
+import { CustomMarkdown } from '@/app/components/CustomMarkdown'
 import { BotMessageSquareIcon } from 'lucide-react'
-import Markdown from 'react-markdown'
 
 interface BotMessageProps {
   content: string
@@ -12,7 +12,7 @@ export default function BotMessage({ content }: BotMessageProps) {
         <BotMessageSquareIcon size={24} strokeWidth={1.5} />
       </div>
       <div>
-        <Markdown>{content}</Markdown>
+        <CustomMarkdown>{content}</CustomMarkdown>
       </div>
     </div>
   )
